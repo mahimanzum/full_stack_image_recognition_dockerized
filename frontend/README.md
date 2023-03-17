@@ -25,20 +25,20 @@ To containerize the frontend, we create a docker image and run
 and the container, using:
 ```
 # build
-docker build -t frontend_serving .
+docker build -t client .
 # run container
-docker run -p 7860:7860 --add-host host.docker.internal:host-gateway --name frnt-serve frontend_serving
+docker run -p 7860:7860 --add-host host.docker.internal:host-gateway --name client client
 ```
 Now, the app is live in `http://0.0.0.0:7860`. Drop your images to make a prediction, or simply use the examples!
 
 #### Push to and test image from Docker Hub
 ```
 # tag
-docker tag frontend_serving hasibzunair/frontend_serving
+docker tag server mahimanzum/classification_client:v1
 # push
-docker push hasibzunair/frontend_serving
+docker push mahimanzum/classification_client:v1
 # run frontend from hub
-docker run -p 7860:7860 --add-host host.docker.internal:host-gateway --name frnt-serve hasibzunair/frontend_serving
+docker run -p 7860:7860 --add-host host.docker.internal:host-gateway --name server mahimanzum/classification_client:v1
 ```
 
 Again, the app should be live at `http://0.0.0.0:7860` for you to play with!

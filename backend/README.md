@@ -5,8 +5,8 @@ Serves a dockerized deep learning image classification model using FastAPI. I us
 ### Local development
 To use this code for local development, install the requirements using (make sure Python version is 3.8):
 ```bash
-git clone https://github.com/hasibzunair/imagercg-waiter
-cd imagercg-waiter/backend
+git clone https://github.com/mahimanzum/full_stack_image_recognition_dockerized
+cd full_stack_image_recognition_dockerized/
 pip install -r requirements.txt
 ```
 Now, you're setup!
@@ -76,9 +76,9 @@ To containerize the backend, we create a docker image and run
 and instance of the image (a container), using:
 ```
 # build
-docker build -t classification_model_serving .
+docker build -t server .
 # run
-docker run -p 8000:80 --name cls-serve classification_model_serving
+docker run -p 8000:80 server
 ```
 
 Now, the model is deployed as an API endpoint in your local machine using docker. Finally, run `curl -X POST -F image=@test1.jpeg "http://0.0.0.0:8000/api/predict"` in your terminal. You should get the same JSON response as above.
@@ -86,11 +86,11 @@ Now, the model is deployed as an API endpoint in your local machine using docker
 #### Push to and test image from Docker Hub
 ```
 # tag
-docker tag classification_model_serving hasibzunair/classification_model_serving
+docker tag server mahimanzum/classification_client:v1
 # push
-docker push hasibzunair/classification_model_serving
+docker push mahimanzum/classification_client:v1
 # run backend from hub
-docker run -p 8000:80 --name cls-serve hasibzunair/classification_model_serving
+docker run -p 8000:80 --name server mahimanzum/classification_server:v1
 ```
 
 Again, you should be able to run `curl -X POST -F image=@test1.jpeg "http://0.0.0.0:8000/api/predict"` and get the same JSON format predictions.
